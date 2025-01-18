@@ -40,7 +40,7 @@ function Header() {
              <h1 className='text-[34px] font-[700] ssm:text-[30px] xsm:text-[22px]'>Hekto</h1>
              <div className='flex gap-3  msm:gap-1 ssm:gap-1 ssm:text-sm xsm:text-[12px] xsm:gap-1 '>
                 <Link href={"/"} className='hover:text-[#FB2E86]'>Home </Link>
-                <Link href={"/"} className='hover:text-[#FB2E86]'>Products </Link>
+                <Link href={"/"} className='hover:text-[#FB2E86]'>About us</Link>
                 <Link href={"/Blog"} className='hover:text-[#FB2E86]'>Blog  </Link>
                 <Link href={"/Shop"} className='hover:text-[#FB2E86]'>Shop </Link>
                 <Link href={"/Contact"} className='hover:text-[#FB2E86]'>Contact </Link>
