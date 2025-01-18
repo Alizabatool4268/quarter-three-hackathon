@@ -6,8 +6,6 @@ import {client} from "@/sanity/lib/client";
 import { urlFor } from '@/sanity/lib/image';
 import Image from 'next/image';
 import Loader from '@/components/Loader';
-import { LuRectangleHorizontal } from "react-icons/lu";
-import { TbRectangleFilled } from "react-icons/tb";
 import { GoDotFill } from "react-icons/go";
 import { GoDot } from "react-icons/go";
 
@@ -76,7 +74,7 @@ function Topcategory() {
         <GoDot/>
        </div>
      </section>
-     
+
   )
 }
 
