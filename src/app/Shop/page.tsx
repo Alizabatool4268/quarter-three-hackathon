@@ -9,8 +9,8 @@ import { urlFor } from '@/sanity/lib/image';
 import Image from 'next/image';
 import Loader from '@/components/Loader';
 import { GoDotFill } from "react-icons/go";
-import { LuShoppingCart } from "react-icons/lu";
-import products from '@/sanity/schemaTypes/products';
+//import { LuShoppingCart } from "react-icons/lu";
+
 
 
 function Page() {
@@ -26,7 +26,6 @@ function Page() {
    };
    const [product,setproduct] = useState<ProductsDetails[]>([]);
    const [Loading,setLoading] = useState(false);
-   const [error, setError] = useState<string | null>(null)
    useEffect(()=>{
     async function fetchproduct (){
         setLoading(true)
@@ -42,7 +41,6 @@ function Page() {
             category
         }`)
         console.log("fetched product",fetchproductdata);
-        setError(null)
         setLoading(false)
         setproduct(fetchproductdata)
     }
@@ -52,7 +50,7 @@ function Page() {
     return(<Loader/>)
    }
    if(!product){
-    setError("product not found")
+    console.log("product not found")
    }
 
   return (

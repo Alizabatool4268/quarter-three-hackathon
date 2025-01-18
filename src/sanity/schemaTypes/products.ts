@@ -44,9 +44,19 @@ export default {
         title: 'Is Featured Product',
       },
       {
-        name: 'isTopCategory',
+        name: 'TopCategory',
         type: 'boolean',
-        title: 'Is Top Category',
+        title: 'Top Category',
+      },
+      {
+        name: 'TrendingProducts',
+        type: 'boolean',
+        title: 'TrendingProducts',
+      },
+      {
+        name: 'LatestProducts',
+        type: 'boolean',
+        title: 'LatestProducts',
       },
       {
         name: 'stockLevel',
