@@ -13,6 +13,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { FaTwitterSquare } from "react-icons/fa";
 import { IoMdArrowForward } from "react-icons/io";
+import {useCart}  from '@/components/cartcontext';
 
 interface PageProps {
   params: Promise<{
@@ -33,6 +34,13 @@ function Page({ params }: PageProps) {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState<ProductsDetails | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { cartItems, addToCart } = useCart();
+  
+  function handleAddToCart(product: ProductsDetails) {
+    console.log("Adding to cart:", product);
+    addToCart(product);
+    console.log("Cart after adding:", cartItems); // Check updated cart
+  }
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -75,6 +83,7 @@ function Page({ params }: PageProps) {
   if (!product) {
     return null;
   }
+
   return (
     <main>
       <section>
@@ -155,7 +164,8 @@ function Page({ params }: PageProps) {
               <FaInstagramSquare  className="text-[#0D134E]"/>
              </span>
           </span>
-          <button className="hover:bg-[#8175ec] hover:text-white text-[#0D134E] h-[35px] w-[100px] rounded-sm">
+          <button className="hover:bg-[#8175ec] hover:text-white text-[#0D134E] h-[35px] w-[100px] 
+          rounded-sm" onClick={() => handleAddToCart(product)}  >
             Add to cart
           </button>
         </div>

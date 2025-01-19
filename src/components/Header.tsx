@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import { CiMail } from "react-icons/ci";
 import { MdOutlineWifiCalling3 } from "react-icons/md";
@@ -7,8 +8,12 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import Link from 'next/link';
+import {useCart} from '@/components/cartcontext';
 
 function Header() {
+  const {
+      cartItems,
+    } = useCart();
   return (
     <header className='overflow-x-hidden'>
         <div className='bg-[#7E33E0] text-white flex justify-around items-center h-[50px]'>
@@ -44,7 +49,10 @@ function Header() {
                 <Link href={"/Blog"} className='hover:text-[#FB2E86]'>Blog  </Link>
                 <Link href={"/Shop"} className='hover:text-[#FB2E86]'>Shop </Link>
                 <Link href={"/Contact"} className='hover:text-[#FB2E86]'>Contact </Link>
-                <span><Link href={"/Cart"}><LuShoppingCart/></Link></span>
+                <span className='flex'>
+                  <Link href={"/Cart"}><LuShoppingCart/></Link>
+                  <span className={`h-4 w-4 rounded-[50%] flex justify-center text-white items-center text-sm  ${cartItems.length ===0?"bg-white":"bg-pink-500"}`}>{cartItems.length}</span>
+                </span>
              </div>
             </div>
             <div className='flex'>

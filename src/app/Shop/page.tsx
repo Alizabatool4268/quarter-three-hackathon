@@ -9,8 +9,7 @@ import { urlFor } from '@/sanity/lib/image';
 import Image from 'next/image';
 import Loader from '@/components/Loader';
 import { GoDotFill } from "react-icons/go";
-//import { LuShoppingCart } from "react-icons/lu";
-
+import { useCart } from '@/components/cartcontext';
 
 
 function Page() {
@@ -24,6 +23,10 @@ function Page() {
         stockLevel:number,
         category:string
    };
+   const {
+       getStockLevel,
+     } = useCart();
+
    const [product,setproduct] = useState<ProductsDetails[]>([]);
    const [Loading,setLoading] = useState(false);
    useEffect(()=>{
@@ -104,7 +107,7 @@ function Page() {
                    <p className='text-[#151875] text-sm'>${data.price}</p>
                    <p className='text-[#FB2E86] text-sm'>Discount {data.discountPercentage}%</p>
                   </span>
-                  <p className='text-[#151875]'>stock {data.stockLevel}</p>
+                  <p className='text-[#151875]'>stock{getStockLevel(data._id)}</p>
                 </span>
             </div>
         </div>
