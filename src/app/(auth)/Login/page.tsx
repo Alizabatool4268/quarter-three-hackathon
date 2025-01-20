@@ -9,7 +9,7 @@ const client = createClient({
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
     token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN,
     useCdn: false,
-    apiVersion: '2025-01-19',
+    apiVersion: '2025-01-15',
 });
 
 interface LoginForm {
