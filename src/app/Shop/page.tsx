@@ -25,6 +25,7 @@ function Page() {
    };
    const {
        getStockLevel,
+       cartItems,
      } = useCart();
 
    const [product,setproduct] = useState<ProductsDetails[]>([]);
@@ -107,7 +108,7 @@ function Page() {
                    <p className='text-[#151875] text-sm'>${data.price}</p>
                    <p className='text-[#FB2E86] text-sm'>Discount {data.discountPercentage}%</p>
                   </span>
-                  <p className='text-[#151875]'>stock{getStockLevel(data._id)}</p>
+                  <p className='text-[#151875]'>stock{cartItems.length===0?data.stockLevel:getStockLevel(data._id)}</p>
                 </span>
             </div>
         </div>

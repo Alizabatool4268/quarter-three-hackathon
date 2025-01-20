@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { useCart } from "@/components/cartcontext";
 import { urlFor } from "@/sanity/lib/image";
+import Link from "next/link";
 
 
 const CartDisplay = () => {
@@ -18,10 +19,12 @@ const CartDisplay = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
+      <h2 className="text-[48px] font-bold mb-4 text-center">Your Cart</h2>
 
       {cartItems.length === 0 ? (
-        <p className="text-gray-500">Your cart is empty</p>
+         <div>
+           <p className="text-gray-500 h-screen text-center">Your cart is empty <Link href={"/Shop"} className="text-pink-500">Continue shopping</Link> </p>
+         </div>
       ) : (
         <>
           {cartItems.map((item) => {

@@ -132,7 +132,7 @@ function Page({ params }: PageProps) {
         </div>
         <div className="flex flex-col gap-2 ">
           <h1 className="text-[#0D134E] font-bold ">{product.name}</h1>
-          <span className="flex gap-1 text-yellow-300">
+          <span className="flex gap-1 text-yellow-500">
             <IoStar />
             <IoStar />
             <IoStar />
@@ -152,10 +152,6 @@ function Page({ params }: PageProps) {
             </span>
           </span>
           <p className="text-[#A9ACC6]">{product.description}</p>
-          <span className="flex items-center gap-2">
-            <p className="text-[#0D134E] font-bold">Categories:</p>
-            <p className="text-[#0D134E] cursor-pointer">S L</p>
-          </span>
           <span className="flex gap-2">
             <p className="text-[#0D134E] font-bold">share</p>
              <span className=" flex justify-center items-center gap-1">
@@ -164,7 +160,7 @@ function Page({ params }: PageProps) {
               <FaInstagramSquare  className="text-[#0D134E]"/>
              </span>
           </span>
-          <button className="hover:bg-[#8175ec] hover:text-white text-[#0D134E] h-[35px] w-[100px] 
+          <button className="bg-[#8175ec] hover:text-white text-[#0D134E] h-[35px] w-[100px] 
           rounded-sm" onClick={() => handleAddToCart(product)}  >
             Add to cart
           </button>
