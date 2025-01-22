@@ -40,9 +40,9 @@ const CartDisplay = () => {
                     <Image
                     height={10}
                     width={20}
-                      src={urlFor(item.image).url()}
-                      alt={item.name}
-                      className="w-20 h-20 object-cover rounded"
+                    src={urlFor(item.image).url()}
+                    alt={item.name}
+                    className="w-20 h-20 object-cover rounded"
                     />
                     <div>
                       <h3 className="font-semibold">{item.name}</h3>
@@ -92,9 +92,12 @@ const CartDisplay = () => {
 
           <div className=" flex justify-around items-center mt-6 p-4 bg-gray-50 rounded-lg">
             <p className="text-xl font-bold text-right">
-              Total: ${getTotalPrice().toFixed(2)}
+              Total: ${getTotalPrice.toFixed(2)}
             </p>
-            <button onClick={clearCart} className="bg-green-500 text-white h-[35px] w-[90px] rounded-lg">Clear Cart</button>
+            <span className="flex gap-2">
+            <button onClick={clearCart} className="bg-green-500 text-white py-2 px-3 rounded-lg xsm:text-sm">Clear Cart</button>
+            <Link href={"/Checkout"} className="bg-pink-500 text-white py-2  px-3 mt-1 rounded-lg xsm:text-sm">Checkout</Link>
+            </span>
           </div>
         </>
       )}

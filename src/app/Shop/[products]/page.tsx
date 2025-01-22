@@ -14,6 +14,7 @@ import { FaInstagramSquare } from "react-icons/fa";
 import { FaTwitterSquare } from "react-icons/fa";
 import { IoMdArrowForward } from "react-icons/io";
 import {useCart}  from '@/components/cartcontext';
+import Swal from "sweetalert2";
 
 interface PageProps {
   params: Promise<{
@@ -40,6 +41,15 @@ function Page({ params }: PageProps) {
     console.log("Adding to cart:", product);
     addToCart(product);
     console.log("Cart after adding:", cartItems); // Check updated cart
+    Swal.fire({
+      title:"success",
+      text:"your items are added to your cart",
+      icon:"success",
+      iconColor:"#FF1788",
+      confirmButtonText:"Continue shopping",
+      confirmButtonColor:"#FF1788"
+    })
+   
   }
   useEffect(() => {
     const fetchProduct = async () => {

@@ -1,39 +1,39 @@
 "use client";
 import React from 'react';
-import { useState, createContext, useCallback, useContext,useEffect } from 'react';
+import { useState, createContext,useCallback,useContext,useEffect } from 'react';
 
 interface ProductsDetails {
-    _id: string,
-    name: string,
-    image: string,
-    price: number,
-    description: string,
-    discountPercentage: number,
-    stockLevel: number,
-    category: string
+    _id:string,
+    name:string,
+    image:string,
+    price:number,
+    description:string,
+    discountPercentage:number,
+    stockLevel:number,
+    category:string
 };
 
 interface CartItem extends ProductsDetails {
-    quantity: number;
+    quantity:number;
 }
 
 interface CartContextType {
-    cartItems: CartItem[];
-    addToCart: (product: ProductsDetails) => void;
+    cartItems:CartItem[];
+    addToCart:(product: ProductsDetails) => void;
     removeFromCart: (productId: string) => void;
     clearCart: () => void;
     incrementProductQuantity: (productId: string) => void;
     decrementProductQuantity: (productId: string) => void;
-    getTotalPrice: () => number;
-    getCartItemCount: () => number;
+    getTotalPrice:number;
+    getCartItemCount: number;
     updateItemQuantity: (productId: string, quantity: number) => void;
     updateStockLevel: (productId: string, quantity: number) => void;
-    isItemInCart: (productId: string) => boolean;
+    isItemInCart:(productId: string) => boolean;
     getItemQuantity: (productId: string) => number;
-    getStockLevel: (productId: string) => number;
+    getStockLevel:(productId: string) => number;
 };
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const CartContext =createContext<CartContextType | undefined>(undefined);
 
 export const useCart = () => {
     const context = useContext(CartContext);
@@ -44,7 +44,7 @@ export const useCart = () => {
 };
 
 export function CartFunctionality({ children }: { children: React.ReactNode }) {
-    const [isClient, setIsClient] = useState(false);
+    const [isClient, setIsClient] = useState(false );
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [stockLevels, setStockLevels] = useState<{ [key: string]: number }>({});
 
@@ -52,22 +52,22 @@ export function CartFunctionality({ children }: { children: React.ReactNode }) {
         setIsClient(true);
         const savedCart = localStorage.getItem('cart');
         const savedStock = localStorage.getItem('stockLevels');
-        if (savedCart) setCartItems(JSON.parse(savedCart));
+        if (savedCart) setCartItems(JSON.parse(savedCart ));
         if (savedStock) setStockLevels(JSON.parse(savedStock));
     }, []);
 
     // client side pa updated stock data or cart safe kia hai local storage mai
     useEffect(() => {
         if (isClient) {
-            localStorage.setItem('cart', JSON.stringify(cartItems));
+            localStorage.setItem('cart', JSON.stringify(cartItems) );
             localStorage.setItem('stockLevels', JSON.stringify(stockLevels));
         }
-    }, [cartItems, stockLevels, isClient]);
+    }, [cartItems, stockLevels,  isClient]);
 
-    const updateStockLevel = useCallback((productId: string, quantity: number) => {
+    const updateStockLevel = useCallback((productId:string, quantity:number) => {
         setStockLevels(prev => ({
             ...prev,
-            [productId]: quantity
+            [productId]:quantity
         }));
     }, []);
 
@@ -77,9 +77,8 @@ export function CartFunctionality({ children }: { children: React.ReactNode }) {
 
     const addToCart = useCallback((product: ProductsDetails) => {
         setCartItems(prev => {
-            const existingItems = prev.find(item => item._id === product._id);
+            const existingItems =prev.find(item => item._id === product._id);
             
-            // Check if adding one more item would exceed stock
             const currentStock = stockLevels[product._id] ?? product.stockLevel;
             if (currentStock <= 0) {
                 return prev; // Agar stock nahi hai tu nahi add karo product 
@@ -88,11 +87,10 @@ export function CartFunctionality({ children }: { children: React.ReactNode }) {
                 ...prevStock,
                 [product._id]: currentStock - 1
             }));
-
             if (existingItems) {
                 return prev.map(item =>
                     item._id === product._id
-                        ? { ...item, quantity: item.quantity + 1 }
+                        ?{ ...item, quantity: item.quantity + 1 }
                         : item
                 );
             }
@@ -101,15 +99,15 @@ export function CartFunctionality({ children }: { children: React.ReactNode }) {
     }, [stockLevels]);
 
     const removeFromCart = useCallback((productId: string) => {
-        const itemToRemove = cartItems.find(item => item._id === productId);
-        if (itemToRemove) {
+        const RemoveItem = cartItems.find(item => item._id === productId);
+        if (RemoveItem) {
             setStockLevels(prev => ({
                 ...prev,
-                [productId]: (prev[productId] ?? itemToRemove.stockLevel) + itemToRemove.quantity
+                [productId]: (prev[productId] ?? RemoveItem.stockLevel) + RemoveItem.quantity
             }));
         }
         setCartItems(prev => prev.filter(item => item._id !== productId));
-    }, [cartItems]);
+    }, [cartItems ]);
 
     const incrementProductQuantity = useCallback((productId: string) => {
         const currentStock = stockLevels[productId];
@@ -122,7 +120,6 @@ export function CartFunctionality({ children }: { children: React.ReactNode }) {
                     : item
             )
         );
-
         setStockLevels(prev => ({
             ...prev,
             [productId]: prev[productId] - 1
@@ -134,19 +131,18 @@ export function CartFunctionality({ children }: { children: React.ReactNode }) {
         setCartItems(prev =>
             prev.map(item =>
                 item._id === productId && item.quantity > 1
-                    ? { ...item, quantity: item.quantity - 1 }
+                    ? { ...item,  quantity: item.quantity - 1 }
                     : item
             )
         );
         setStockLevels(prev => {
             const currentQuantity = cartItems.find(item => item._id === productId)?.quantity;
-            if (currentQuantity && currentQuantity > 1) {
+            if (currentQuantity &&  currentQuantity > 1) {
                 return {
                     ...prev,
                     [productId]: prev[productId] + 1
                 };
             }
-    
             return prev;
         });
     }, [cartItems]);
@@ -160,7 +156,7 @@ export function CartFunctionality({ children }: { children: React.ReactNode }) {
 
         if (quantityDiff > currentStock) return; 
 
-        if (quantity <= 0) {
+        if (quantity <=  0) {
             removeFromCart(productId);
             return;
         }
@@ -169,19 +165,19 @@ export function CartFunctionality({ children }: { children: React.ReactNode }) {
             prev.map(item =>
                 item._id === productId
                     ? { ...item, quantity }
-                    : item
+                : item
             )
         );
         setStockLevels(prev => ({
             ...prev,
             [productId]: prev[productId] - quantityDiff
         }));
-    }, [cartItems, stockLevels, removeFromCart]);
+    }, [cartItems, stockLevels, removeFromCart] );
 
     const clearCart = useCallback(() => {
         // Restore all stock when clearing cart
-        cartItems.forEach(item => {
-            setStockLevels(prev => ({
+     cartItems.forEach(item => {
+        setStockLevels(prev => ({
                 ...prev,
                 [item._id]: (prev[item._id] ?? item.stockLevel) + item.quantity
             }));
@@ -189,14 +185,10 @@ export function CartFunctionality({ children }: { children: React.ReactNode }) {
         setCartItems([]);
     }, [cartItems]);
 
-    const getTotalPrice = useCallback(() => {
-        return cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    }, [cartItems]);
+    const getTotalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-    const getCartItemCount = useCallback(() => {
-        return cartItems.reduce((count, item) => count + item.quantity, 0);
-    }, [cartItems]);
-
+    const getCartItemCount =  cartItems.reduce((count, item) => count + item.quantity, 0);
+    
     const isItemInCart = useCallback((productId: string) => {
         return cartItems.some(item => item._id === productId);
     }, [cartItems]);
@@ -223,9 +215,9 @@ export function CartFunctionality({ children }: { children: React.ReactNode }) {
     };
 
     return (
-        <CartContext.Provider value={value}>
+        <CartContext.Provider value={ value}>
             {children}
-        </CartContext.Provider>
+          </CartContext.Provider>
     );
 }
 

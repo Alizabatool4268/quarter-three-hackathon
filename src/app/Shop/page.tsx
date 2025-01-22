@@ -46,7 +46,7 @@ function Page() {
            'ssm:grid-cols-1 ssm:grid-rows-12 xsm:grid-cols-1 xsm:grid-rows-12';
   };
 
-  // Function to handle categories 
+  // Function to handle the categories 
   const handleCategoryFilter = async (category: string) => {
     setLoading(true);
     setSelectedCategory(category);
@@ -166,7 +166,7 @@ function Page() {
                   <p className='text-[#151875] text-sm'>${data.price}</p>
                   <p className='text-[#FB2E86] text-sm'>Discount {data.discountPercentage}%</p>
                 </span>
-                <p className='text-[#151875]'>stock{cartItems.length === 0 ? data.stockLevel : getStockLevel(data._id)}</p>
+                <p className='text-[#151875]' >stock{cartItems.length === 0 ? data.stockLevel : getStockLevel(data._id) }</p>
               </span>
             </div>
           </div>
