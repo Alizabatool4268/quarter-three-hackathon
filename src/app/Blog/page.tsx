@@ -44,7 +44,7 @@ function Blog() {
         {/* main blog section start */}
         <section className='flex justify-center gap-6 flex-row-reverse'>
             {/* blog sidebar */}
-            <section className='mt-7 flex flex-col gap-4'>
+            <section className='mt-7 flex flex-col gap-4 msm:hidden xsm:hidden ssm:hidden sm:hidden'>
              <h2 className='font-bold text-[#151875]'>Search</h2>
               <span className='flex justify-center items-center'>
                 <input type="text" className='h-[40px] border-[1px] border-solid border-black w-[300px] xsm:w-[250px] md:w-[260px] sm:w-[400px]' />
